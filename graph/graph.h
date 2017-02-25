@@ -2,7 +2,6 @@
 #define GRAPH_H
 
 #include <deque>
-#include <initializer_list>
 #include "node.h"
 #include "edge.h"
 
@@ -55,6 +54,7 @@ public:
 	for (edge* i : toremove)
 	    delete i;
     }
+    
     void removeEdge(edge* remv) {
 	delete remv;
     }
