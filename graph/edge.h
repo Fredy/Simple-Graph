@@ -6,7 +6,7 @@
 template <typename G>
 class Edge {
 public:
-    using E = typename G::typeE;
+    using typeE = typename G::typeE;
     using node = typename G::node;
     using edge = typename G::edge;
 private:
@@ -17,9 +17,16 @@ private:
 	while(*fnd != e)
 	    fnd++;
 	eList1.erase(fnd);
-	// And the edge list of the second conected node:
+        // And the edge list of the second conected node:
 	auto& eList2 = e->conNodes.second->edgeList;
+
+	// If the edge is a loop then it was already deleted from the
+	// edge list so the function returns;
+	if (e->conNodes.first == e->conNodes.second)
+	    return;
+	
 	fnd = eList2.begin();
+
 	while(*fnd != e)
 	    fnd++;
 	eList2.erase(fnd);
@@ -27,13 +34,17 @@ private:
     }
     
 public:
-    E value;
+    typeE value;
     std::pair<node*,node*> conNodes;
-    bool dir; // 0: [0] <-> [1] ; 1: [0] -> [1]
+    bool direction; // 0: [0] <-> [1] ; 1: [0] -> [1]
 
-    Edge(E val, node* nodeA, node* nodeB) {
+    // TODO: copy constructor  ???
+    // TODO: overlodad operator = ???
+    
+    Edge(typeE val, node* nodeA, node* nodeB, bool dir = 0) {
 	value = val;
 	conNodes = {nodeA, nodeB};
+	direction = dir;
     }
     
     ~Edge() {

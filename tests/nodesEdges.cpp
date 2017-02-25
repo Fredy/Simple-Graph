@@ -21,7 +21,7 @@ int main() {
     z->edgeList.push_back(a);
     y->edgeList.push_back(b);
     w->edgeList.push_back(c);
-
+    
     auto print = [&] (node *n) {
 	cout << "Node: " << n->value << endl;
 	for (const auto& i : n->edgeList)
@@ -47,5 +47,4 @@ int main() {
     delete c;
 
     printAll();
-		 
 }

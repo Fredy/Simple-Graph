@@ -8,12 +8,15 @@ private:
 public:
     using node = typename G::node;
     using edge = typename G::edge;
-    using N = typename G::typeN;
+    using typeN = typename G::typeN;
 
-    N value;
+    typeN value;
     std::deque<edge*> edgeList;
-    
-    Node(N v) {
+
+    // TODO: copy constructor 
+    // TODO: overlodad operator =
+
+    Node(typeN v) {
 	value = v;
     }
     
