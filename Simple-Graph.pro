@@ -19,6 +19,7 @@ SOURCES += \
 HEADERS += \
     graph/edge.h \
     graph/graph.h \
-    graph/node.h
+    graph/node.h \
+    coordGraph/coordGraph.h
 
 # FORMS += 

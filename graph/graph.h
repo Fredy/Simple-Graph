@@ -15,6 +15,7 @@ public:
     using edge = Edge<self>;   
 protected:
     std::deque<node*> nodeList;
+    
 public:
     void insertNode(typeN val) {
 	nodeList.push_back(new node(val));
@@ -58,7 +59,17 @@ public:
     void removeEdge(edge* remv) {
 	delete remv;
     }
-    
+
+    void clear() {
+	while(!nodeList.empty()){
+	    delete nodeList.back();
+	    nodeList.pop_back();
+	}
+    }
+
+    ~Graph() {
+	this->clear();
+    }
 };
 
 #endif //GRAPH_H
