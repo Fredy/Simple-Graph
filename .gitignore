@@ -57,7 +57,10 @@ Makefile*
 *.qmlproject.user
 *.qmlproject.user.*
 
-# Emacs stuff
-*.el
 # QtCtreator CMake
 CMakeLists.txt.user*
+
+build*/
+# Emacs stuff
+*.el
+

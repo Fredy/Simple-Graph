@@ -12,9 +12,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG += c++14
 
-SOURCES += \  
-    tests/graphInsertDelete.cpp \
-    tests/nodesEdges.cpp
+SOURCES +=
 
 HEADERS += \
     graph/edge.h \

@@ -12,7 +12,8 @@ public:
     using typeN = N;
     using typeE = E;
     using node = Node<self>;
-    using edge = Edge<self>;   
+    using edge = Edge<self>;
+    
 protected:
     std::deque<node*> nodeList;
     
