@@ -1,4 +1,4 @@
-#include "../../coordGraph/coordGraph.h"
+#include "../coordGraph/coordGraph.h"
 #include <iostream>
 using namespace std;
 
