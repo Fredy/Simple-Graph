@@ -12,7 +12,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 CONFIG += c++14
 
-SOURCES +=
+SOURCES += \
+    main.cpp
 
 HEADERS += \
     graph/edge.h \

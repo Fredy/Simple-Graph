@@ -13,22 +13,22 @@ public:
     using typeE = E;
     using node = Node<self>;
     using edge = Edge<self>;
-    
+
 protected:
     std::deque<node*> nodeList;
-    
+
 public:
     void insertNode(typeN val) {
 	nodeList.push_back(new node(val));
     }
-    
+
     void insertEdge(typeE val, node* nodeA, node* nodeB, bool dir = 0) {
 	edge* tmp = new edge(val, nodeA, nodeB, dir);
 	nodeA->edgeList.push_back(tmp);
 	if (nodeA != nodeB) // If the edge is a loop we don't have to push it again
 	    nodeB->edgeList.push_back(tmp);
     }
-    
+
     void removeNode(node* remv) {
 	auto fnd = nodeList.begin();
 	while (*fnd != remv)
@@ -36,7 +36,7 @@ public:
 	delete *fnd;
 	nodeList.erase(fnd);
     }
-    
+
     void removeNode(typename std::deque<node*>::iterator iterator) {
 	delete *iterator;
 	nodeList.erase(iterator);
@@ -48,7 +48,7 @@ public:
 	for (edge* i : nodeA->edgeList) {
 	    auto& first = i->conNodes.first;
 	    auto& second = i->conNodes.second;
-	       
+
 	    if ((first == nodeA and second == nodeB) or
 		(first == nodeB and second == nodeA))
 		toremove.push_back(i);
@@ -56,9 +56,13 @@ public:
 	for (edge* i : toremove)
 	    delete i;
     }
-    
+
     void removeEdge(edge* remv) {
 	delete remv;
+    }
+
+    const std::deque<node*>& getNodeList() {
+        return nodeList;
     }
 
     void clear() {
@@ -67,6 +71,8 @@ public:
 	    nodeList.pop_back();
 	}
     }
+
+
 
     ~Graph() {
 	this->clear();
