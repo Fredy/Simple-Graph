@@ -63,4 +63,4 @@ CMakeLists.txt.user*
 build*/
 # Emacs stuff
 *.el
-
+.clang_complete
