@@ -13,7 +13,7 @@ int main(int argc, char **argv) {
     QGraphicsView view(&window);
     QGraphicsScene* scene = new QGraphicsScene(&window) ;
     CoordGraph graph;
-    graph.randomGeneration(50, 44, 3, 500);
+    graph.randomGeneration(200, 3, 50, 1, 500);
 
     const auto& v = graph.getNodeList();
 

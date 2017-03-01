@@ -42,7 +42,7 @@ private:
     }
 
     // d = sqrt((x1 - x2)² +(y1 - y2)²)
-    void randomGenEdges(int maxEdges, double distance) {
+    void randomGenEdges(unsigned int maxEdges, double distance) {
         for (auto i = nodeList.begin(); i < nodeList.end(); i++) {
             for (auto j = i + 1; j < nodeList.end(); j++) {
                 if ((*i)->edgeList.size() >= maxEdges)
@@ -56,13 +56,13 @@ private:
 
 public:
 
-    void randomGeneration(int nodesN, int edgesN, double limitA, double limitB) {
+    void randomGeneration(int nodesN, int edgesN, double distance, double limitA, double limitB) {
         if(!nodeList.empty()){
             this->clear();
         }
         nodeList = randomGenNodes(nodesN, limitA, limitB);
         sortNodes();
-        randomGenEdges(edgesN, 123); // TODO: find a good distance
+        randomGenEdges(edgesN, distance); // TODO: find a good distance
     }
 
     //TODO : removNodeRange : passing 2 QPointF or passing 2 x, y (doubles)
