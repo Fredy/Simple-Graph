@@ -69,10 +69,6 @@ public:
     void removeNodeRange() {
 
     }
-
-
 };
-
-
 
 #endif //COORDGRAPH_H

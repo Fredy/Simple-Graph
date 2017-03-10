@@ -24,17 +24,17 @@ public:
     // TODO: overlodad operator =
 
     Node(typeN v) {
-	value = v;
+        value = v;
 
         graphics = nullptr;
         printed = false;
     }
 
     ~Node() {
-	// The edge destructor is in charge of removing the edge ptr
-	// contained in the edgeList...
-	while (!edgeList.empty())
-	    delete edgeList.front();
+        // The edge destructor is in charge of removing the edge ptr
+        // contained in the edgeList...
+        while (!edgeList.empty())
+            delete edgeList.front();
     }
 };
 
