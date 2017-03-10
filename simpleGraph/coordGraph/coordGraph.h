@@ -36,33 +36,42 @@ private:
     }
 
     double distance(node* a, node* b) {
+        // d = sqrt((x1 - x2)² +(y1 - y2)²)
         double x = a->value.x() - b->value.x();
         double y = a->value.y() - b->value.y();
         return sqrt(x * x + y * y);
     }
 
-    // d = sqrt((x1 - x2)² +(y1 - y2)²)
-    void randomGenEdges(unsigned int maxEdges, double distance) {
+    // TODO: !!! make this return nothing. This will return a list of edges ptr,
+    // just to make it easier to add this edges into the graphic part.
+    std::deque<edge*> randomGenEdges(unsigned int maxEdges, double distance) {
+        std::deque<edge*> ret;
         for (auto i = nodeList.begin(); i < nodeList.end(); i++) {
             for (auto j = i + 1; j < nodeList.end(); j++) {
                 if ((*i)->edgeList.size() >= maxEdges)
                     break;
                 double dist = this->distance(*i, *j);
-                if (dist <= distance)
-                    insertEdge(dist, *i, *j); // TODO: randomize the direction
+                if (dist <= distance) {
+                    edge* tmp = insertEdge(dist, *i, *j); // TODO: randomize the direction
+                    ret.push_back(tmp);
+                }
             }
         }
+        return ret;
     }
 
-public:
 
-    void randomGeneration(int nodesN, int edgesN, double distance, double limitA, double limitB) {
+public:
+    // TODO: !!! make this return nothing. This will return a list of edges ptr,
+    // just to make it easier to add this edges into the graphic part.
+    std::deque<edge*> randomGeneration(int nodesN, int edgesN, double distance, double limitA, double limitB) {
         if(!nodeList.empty()){
             this->clear();
         }
         nodeList = randomGenNodes(nodesN, limitA, limitB);
         sortNodes();
-        randomGenEdges(edgesN, distance); // TODO: find a good distance
+        std::deque<edge*> tmp = randomGenEdges(edgesN, distance); // TODO: find a good distance
+        return tmp;
     }
 
     //TODO : removNodeRange : passing 2 QPointF or passing 2 x, y (doubles)
