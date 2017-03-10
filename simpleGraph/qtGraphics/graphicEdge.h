@@ -2,7 +2,6 @@
 #define GRAPHICEDGE_H
 
 #include <QGraphicsLineItem>
-#include <QPen>
 #include "../coordGraph/coordGraph.h"
 
 class GraphicEdge : public QGraphicsLineItem {
@@ -14,7 +13,7 @@ public:
 
     GraphicEdge(CoordGraph::edge* data, QGraphicsItem * parent = 0);
 
-    void setColor(const QColor& color) { this->setPen(QPen(color, 1)); }
+    void setColor(const QColor& color);
 };
 
 #endif //GRAPHICEDGE_H

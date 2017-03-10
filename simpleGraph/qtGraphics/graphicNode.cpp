@@ -1,5 +1,4 @@
-#include <QPen>
-#include <QPainter>
+#include <QBrush>
 #include <QGraphicsScene>
 #include "graphicNode.h"
 #include "graphicEdge.h"
@@ -20,4 +19,8 @@ void GraphicNode::removeEdges() {
             i->graphics = nullptr;
         }
     }
+}
+
+void GraphicNode::setColor(const QColor &color) {
+    this->setBrush(color);
 }

@@ -2,7 +2,6 @@
 #define GRAPHICNODE_H
 
 #include <QGraphicsEllipseItem>
-#include <QBrush>
 #include "../coordGraph/coordGraph.h"
 
 class GraphicNode : public QGraphicsEllipseItem {
@@ -18,7 +17,7 @@ public:
     // This can't do that because is necessary to remove the nodes
     // from the node list in the graph.
 
-    void setColor(const QColor& color) { this->setBrush(color); }
+    void setColor(const QColor& color);
 
     void removeEdges();
 
