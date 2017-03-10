@@ -13,12 +13,16 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++14
 
 SOURCES += \
-    main.cpp
+    main.cpp \
+    qtGraphics/graphicEdge.cpp \
+    qtGraphics/graphicNode.cpp
 
 HEADERS += \
     graph/edge.h \
     graph/graph.h \
     graph/node.h \
-    coordGraph/coordGraph.h
+    coordGraph/coordGraph.h \
+    qtGraphics/graphicEdge.h \
+    qtGraphics/graphicNode.h
 
 # FORMS += 

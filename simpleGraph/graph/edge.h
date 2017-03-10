@@ -17,14 +17,14 @@ private:
 	while(*fnd != e)
 	    fnd++;
 	eList1.erase(fnd);
-        // And the edge list of the second conected node:
+        // And this is  the edge list of the second conected node:
 	auto& eList2 = e->conNodes.second->edgeList;
 
 	// If the edge is a loop then it was already deleted from the
 	// edge list so the function returns;
 	if (e->conNodes.first == e->conNodes.second)
 	    return;
-	
+
 	fnd = eList2.begin();
 
 	while(*fnd != e)
@@ -32,7 +32,7 @@ private:
 	eList2.erase(fnd);
 	// TODO: convert the conected nodes to nullptr ??
     }
-    
+
 public:
     typeE value;
     std::pair<node*,node*> conNodes;
@@ -40,15 +40,15 @@ public:
 
     // TODO: copy constructor  ???
     // TODO: overlodad operator = ???
-    
+
     Edge(typeE val, node* nodeA, node* nodeB, bool dir = 0) {
 	value = val;
 	conNodes = {nodeA, nodeB};
 	direction = dir;
     }
-    
+
     ~Edge() {
-	removeCon(this);		
+	removeCon(this);
     }
 };
 
