@@ -22,14 +22,11 @@ public:
 	nodeList.push_back(new node(val));
     }
 
-    // TODO: !!! make this return nothing. This will return a  edges ptr,
-    // just to make it easier to add this edges into the graphic part.
-    edge* insertEdge(typeE val, node* nodeA, node* nodeB, bool dir = 0) {
+    void insertEdge(typeE val, node* nodeA, node* nodeB, bool dir = 0) {
 	edge* tmp = new edge(val, nodeA, nodeB, dir);
 	nodeA->edgeList.push_back(tmp);
 	if (nodeA != nodeB) // If the edge is a loop we don't have to push it again
 	    nodeB->edgeList.push_back(tmp);
-        return tmp;
     }
 
     void removeNode(node* remv) {
