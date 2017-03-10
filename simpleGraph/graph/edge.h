@@ -3,6 +3,8 @@
 
 #include <utility>
 
+class GraphicEdge;
+
 template <typename G>
 class Edge {
 public:
@@ -38,6 +40,11 @@ public:
     std::pair<node*,node*> conNodes;
     bool direction; // 0: [0] <-> [1] ; 1: [0] -> [1]
 
+    // Connects this part with the graphics part:
+    GraphicEdge* graphics;
+    bool printed;
+
+
     // TODO: copy constructor  ???
     // TODO: overlodad operator = ???
 
@@ -45,6 +52,9 @@ public:
 	value = val;
 	conNodes = {nodeA, nodeB};
 	direction = dir;
+
+        graphics = nullptr;
+        printed = false;
     }
 
     ~Edge() {
