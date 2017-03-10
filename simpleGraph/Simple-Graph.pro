@@ -15,7 +15,9 @@ CONFIG += c++14
 SOURCES += \
     main.cpp \
     qtGraphics/graphicEdge.cpp \
-    qtGraphics/graphicNode.cpp
+    qtGraphics/graphicNode.cpp \
+    qtGraphics/graphScene.cpp \
+    qtGraphics/mainWindow.cpp
 
 HEADERS += \
     graph/edge.h \
@@ -23,6 +25,8 @@ HEADERS += \
     graph/node.h \
     coordGraph/coordGraph.h \
     qtGraphics/graphicEdge.h \
-    qtGraphics/graphicNode.h
+    qtGraphics/graphicNode.h \
+    qtGraphics/graphScene.h \
+    qtGraphics/mainWindow.h
 
 # FORMS += 

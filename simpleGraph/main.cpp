@@ -1,30 +1,13 @@
+#include "qtGraphics/mainWindow.h"
 #include <QApplication>
 
-#include <QPushButton>
-#include <QFont>
-#include <QIcon>
-#include <QGraphicsView>
-#include <QGraphicsScene>
-#include "coordGraph/coordGraph.h"
+int main(int argv, char *args[])
+{
 
-int main(int argc, char **argv) {
-    QApplication app(argc, argv);
-    QWidget window;
-    QGraphicsView view(&window);
-    QGraphicsScene* scene = new QGraphicsScene(&window) ;
-    CoordGraph graph;
-    graph.randomGeneration(200, 3, 50, 1, 500);
+    QApplication app(argv, args);
+    MainWindow mainWindow;
+    mainWindow.setGeometry(100, 100, 800, 500);
+    mainWindow.show();
 
-    const auto& v = graph.getNodeList();
-
-    for (const auto& i : v) {
-        scene->addEllipse(i->value.x(), i->value.y(), 3, 3, QPen(Qt::black));
-        for (const auto& j : i->edgeList) {
-            scene->addLine(j->conNodes.first->value.x(), j->conNodes.first->value.y(), j->conNodes.second->value.x(), j->conNodes.second->value.y());
-        }
-    }
-
-    view.setScene(scene);
-    window.show();
     return app.exec();
 }
