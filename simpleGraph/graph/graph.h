@@ -37,9 +37,10 @@ public:
         nodeList.erase(fnd);
     }
 
-    void removeNode(typename std::deque<node*>::iterator iterator) {
+    typename std::deque<node*>::iterator
+    removeNode(typename std::deque<node*>::iterator iterator) {
         delete *iterator;
-        nodeList.erase(iterator);
+        return nodeList.erase(iterator);
     }
 
     // Remove all the edges between two nodes:

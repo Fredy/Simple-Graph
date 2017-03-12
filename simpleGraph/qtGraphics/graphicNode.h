@@ -19,7 +19,7 @@ public:
 
     void setColor(const QColor& color);
 
-    void removeEdges();
+    bool removeEdges();
 
 };
 

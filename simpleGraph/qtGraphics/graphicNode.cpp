@@ -11,14 +11,15 @@ GraphicNode::GraphicNode(CoordGraph::node* data, qreal radius, QGraphicsItem* pa
     this->setBrush(Qt::red); // TODO: find a good color;
 }
 
-void GraphicNode::removeEdges() {
+bool GraphicNode::removeEdges() {
     for (auto& i : data->edgeList) {
-        if (i->graphics) {
+        if (i->graphics != nullptr) {
             scene()->removeItem(i->graphics);
             delete i->graphics;
             i->graphics = nullptr;
         }
     }
+    return true;
 }
 
 void GraphicNode::setColor(const QColor &color) {

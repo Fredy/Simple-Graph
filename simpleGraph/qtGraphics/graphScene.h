@@ -13,6 +13,8 @@ private:
     QGraphicsRectItem* selectRect;
     QPointF selectFirstPoint;
 
+    void removeSelected(QRectF rect);
+
 public:
     explicit GraphScene(QObject* parent = 0);
 

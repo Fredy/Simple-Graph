@@ -65,9 +65,14 @@ public:
         randomGenEdges(edgesN, distance); // TODO: find a good distance
     }
 
-    //TODO : removNodeRange : passing 2 QPointF or passing 2 x, y (doubles)
-    void removeNodeRange() {
-
+    void removeNodeRange(QPointF first, QPointF last) {
+        for (auto i = nodeList.begin(); i < nodeList.end();) {
+            if ((*i)->value.x() >= first.x() and (*i)->value.x() <= last.x() and
+                (*i)->value.y() >= first.y() and (*i)->value.y() <= last.y())
+                i = this->removeNode(i);
+            else
+                i++;
+        }
     }
 };
 

@@ -42,8 +42,6 @@ public:
 
     // Connects this part with the graphics part:
     GraphicEdge* graphics;
-    bool printed;
-
 
     // TODO: copy constructor  ???
     // TODO: overlodad operator = ???
@@ -54,7 +52,6 @@ public:
         direction = dir;
 
         graphics = nullptr;
-        printed = false;
     }
 
     ~Edge() {

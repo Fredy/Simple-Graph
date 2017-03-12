@@ -14,11 +14,12 @@ void GraphScene::showGraph() {
 
     for (const auto& i : v) {
         GraphicNode* node = new GraphicNode(i, 3);
+        i->graphics = node;
         this->addItem(node);
         for (const auto& j : i->edgeList) {
-            if (!j->printed) {
-                j->printed = true;
+            if (!j->graphics) {
                 GraphicEdge* edge = new GraphicEdge(j);
+                j->graphics = edge;
                 this->addItem(edge);
             }
         }
@@ -32,6 +33,28 @@ void GraphScene::randomizeGraph(int nodesN, int edgesN, double distance, double 
     graph->randomGeneration(nodesN, edgesN, distance, limitA, limitB);
     this->showGraph();
 
+}
+
+void GraphScene::removeSelected(QRectF rect) {
+    // TODO: IMPORTANT!!!! :
+    // the function items in rectangle include all the items that intersect with the
+    // rectangle. if the center of the node(circle) is not intersecting with the rectangle,
+    // this will not be deleted from the base graph!!!!
+    auto selectedItems = this->items(rect);
+    QList<GraphicNode*> nodes;
+    for (const auto& item : selectedItems) {
+        if (item->type() == GraphicNode::Type) {
+            GraphicNode* gnode = qgraphicsitem_cast<GraphicNode*>(item);
+            nodes.push_back(gnode);
+        }
+    }
+    for (const auto& gnode : nodes) {
+        gnode->removeEdges(); // aqui explota ?
+        this->removeItem(gnode);
+        delete gnode;
+
+    }
+    graph->removeNodeRange(rect.topLeft(), rect.bottomRight());
 }
 
 void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
@@ -80,10 +103,12 @@ void GraphScene::mouseMoveEvent(QGraphicsSceneMouseEvent *mouseEvent) {
 
 void GraphScene::mouseReleaseEvent(QGraphicsSceneMouseEvent *mouseEvent) {
     if (selectRect != nullptr and mouseEvent->button() == Qt::RightButton) {
+        this->removeSelected(selectRect->rect());
+
         this->removeItem(selectRect);
         delete selectRect;
         selectRect = nullptr;
-        // TODO: Delete portion delimited by the selectRect
+
     }
     QGraphicsScene::mouseReleaseEvent(mouseEvent);
 }

@@ -18,7 +18,6 @@ public:
 
     // Connects this part with the graphics part:
     GraphicNode* graphics;
-    bool printed;
 
     // TODO: copy constructor
     // TODO: overlodad operator =
@@ -27,7 +26,6 @@ public:
         value = v;
 
         graphics = nullptr;
-        printed = false;
     }
 
     ~Node() {
