@@ -41,6 +41,9 @@ void GraphScene::removeSelected(QRectF rect) {
     // rectangle. if the center of the node(circle) is not intersecting with the rectangle,
     // this will not be deleted from the base graph!!!!
     auto selectedItems = this->items(rect);
+    if (selectedItems.empty())
+        return;
+
     QList<GraphicNode*> nodes;
     for (const auto& item : selectedItems) {
         if (item->type() == GraphicNode::Type) {
