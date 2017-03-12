@@ -5,7 +5,7 @@
 
 MainWindow::MainWindow() {
     scene = new GraphScene(this);
-    scene->setSceneRect(QRectF(0, 0, 1000, 1000)); //TODO: Adjust this values acording the graph limits.
+    scene->setSceneRect(QRectF(0, 0, 1000, 1000)); //TODO: Adjust this values acording to the graph limits.
     scene->randomizeGraph(200, 3, 50, 1, 500);
 
     QHBoxLayout *layout = new QHBoxLayout;
