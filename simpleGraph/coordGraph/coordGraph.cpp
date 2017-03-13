@@ -48,8 +48,6 @@ void CoordGraph::randomGenEdges(unsigned int maxEdges, double distance) {
     }
 }
 
-
-
 void CoordGraph::randomGeneration(int nodesN, int edgesN, double distance, double limitA, double limitB) {
     if(!nodeList.empty()){
         this->clear();
