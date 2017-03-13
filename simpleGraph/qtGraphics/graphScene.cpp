@@ -21,6 +21,7 @@ void GraphScene::showGraph() {
                 GraphicEdge* edge = new GraphicEdge(j);
                 j->graphics = edge;
                 this->addItem(edge);
+                edge->setZValue(-1.0);
             }
         }
     }

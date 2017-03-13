@@ -1,5 +1,6 @@
 #include <QBrush>
 #include <QGraphicsScene>
+#include <QStringBuilder>
 #include "graphicNode.h"
 #include "graphicEdge.h"
 
@@ -9,6 +10,8 @@ GraphicNode::GraphicNode(CoordGraph::node* data, qreal radius, QGraphicsItem* pa
     this->data = data;
     this->setPen(QPen(Qt::black, 1));
     this->setBrush(Qt::red); // TODO: find a good color;
+    this->setFlag(QGraphicsItem::ItemIsSelectable, true);
+    this->setToolTip(QString::number(data->value.x()) % ", " % QString::number(data->value.y()));
 }
 
 void GraphicNode::removeEdges() {
