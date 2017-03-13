@@ -17,7 +17,8 @@ SOURCES += \
     qtGraphics/graphicEdge.cpp \
     qtGraphics/graphicNode.cpp \
     qtGraphics/graphScene.cpp \
-    qtGraphics/mainWindow.cpp
+    qtGraphics/mainWindow.cpp \
+    coordGraph/coordGraph.cpp
 
 HEADERS += \
     graph/edge.h \
