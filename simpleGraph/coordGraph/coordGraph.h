@@ -3,7 +3,6 @@
 
 #include <deque>
 #include <QPointF>
-#include <utility>
 #include "../graph/graph.h"
 
 class CoordGraph : public Graph<QPointF, double> {
