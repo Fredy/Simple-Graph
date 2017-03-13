@@ -57,6 +57,15 @@ public:
     ~Edge() {
         removeCon(this);
     }
+
+    node*& otherNode(const node*& n) {
+        if (n != conNodes.second)
+            return conNodes.second;
+        else if (n != conNodes.first)
+            return conNodes.first;
+        else
+            return nullptr;
+    }
 };
 
 #endif //EDGE_H
