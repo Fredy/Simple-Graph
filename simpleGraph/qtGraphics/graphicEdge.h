@@ -14,6 +14,8 @@ public:
     GraphicEdge(CoordGraph::edge* data, QGraphicsItem * parent = 0);
 
     void setColor(const QColor& color);
+
+    CoordGraph::edge* getData() { return data; }
 };
 
 #endif //GRAPHICEDGE_H

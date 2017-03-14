@@ -1,12 +1,15 @@
+#include <utility>
 #include <QGraphicsSceneMouseEvent>
 #include "graphScene.h"
 #include "../coordGraph/coordGraph.h"
 #include "graphicNode.h"
 #include "graphicEdge.h"
+#include <QDebug>
 
 GraphScene::GraphScene(QObject* parent) : QGraphicsScene(parent) {
     graph = new CoordGraph();
     selectRect = nullptr;
+    selecNodes[0] = selecNodes[1] = nullptr;
 }
 
 void GraphScene::showGraph() {
@@ -63,6 +66,50 @@ void GraphScene::removeSelected(QRectF rect) {
 
 void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
     if (mouseEvent->button() == Qt::LeftButton) {
+        // for (const auto& i : this->selectedItems()) {
+        //     if (i->type() == GraphicNode::Type) {
+        //         if (selecNodes[0] == nullptr)
+        //             selecNodes[0] = qgraphicsitem_cast<GraphicNode*>(i);
+        //         else
+        //             selecNodes[1] = qgraphicsitem_cast<GraphicNode*>(i);
+        //     }
+        // }
+
+        // TODO: Move all this into a function;
+        // TODO: update the colors of edges and nodes autommatically when
+        // other mouse button is pressed.
+        // TODO: remove qDebug() and draw the path lenght in the scene;
+        QList<QGraphicsItem*> itemsList = items(mouseEvent->scenePos());
+        if (!itemsList.empty()) {
+            QGraphicsItem* item = itemsList.front();
+            if (item and item->type() == GraphicNode::Type) {
+                GraphicNode* gnode = qgraphicsitem_cast<GraphicNode*>(item);
+                if (selecNodes[0] == nullptr) {
+                    selecNodes[0] = gnode;
+                    gnode->setColor(Qt::green);
+                    this->update();
+                }
+                else {
+                    selecNodes[1] = gnode;
+                    gnode->setColor(Qt::green);
+                    this->update();
+                }
+            }
+            if (selecNodes[0] and selecNodes[1]) {
+                auto res =  graph->minPathDijkstra(selecNodes[0]->getData(), selecNodes[1]->getData());
+                qDebug() << res.first << endl;
+                for (const auto& i : res.second) {
+                    i->graphics->setColor(Qt::green);
+                }
+                this->update();
+                // selecNodes[0]->setColor(Qt::red);
+                // selecNodes[1]->setColor(Qt::red);
+                // for (const auto& i : res.second) {
+                //     i->graphics->setColor(Qt::black);
+                // }
+                selecNodes[0] = selecNodes[1] = nullptr;
+            }
+        }
 
     }
     else if (mouseEvent->button() == Qt::RightButton) {

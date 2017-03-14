@@ -58,7 +58,7 @@ public:
         removeCon(this);
     }
 
-    node*& otherNode(const node*& n) {
+    node* otherNode(const node* n) {
         if (n != conNodes.second)
             return conNodes.second;
         else if (n != conNodes.first)

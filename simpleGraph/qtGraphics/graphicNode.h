@@ -21,6 +21,7 @@ public:
 
     void removeEdges();
 
+    CoordGraph::node* getData() { return data; }
 };
 
 #endif //GRAPHICNODE_H

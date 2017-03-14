@@ -4,6 +4,7 @@
 #include <QGraphicsScene>
 
 class CoordGraph;
+class GraphicNode;
 
 class GraphScene : public QGraphicsScene {
     Q_OBJECT
@@ -12,6 +13,7 @@ private:
     CoordGraph* graph;
     QGraphicsRectItem* selectRect;
     QPointF selectFirstPoint;
+    GraphicNode* selecNodes[2];
 
     void removeSelected(QRectF rect);
 
