@@ -4,40 +4,38 @@
 
 class GraphicNode;
 
-
-template <typename G>
-class Node {
+template <typename G> class Node {
 private:
 public:
-    using node = typename G::node;
-    using edge = typename G::edge;
-    using typeN = typename G::typeN;
+  using node = typename G::node;
+  using edge = typename G::edge;
+  using typeN = typename G::typeN;
 
-    typeN value;
-    std::deque<edge*> edgeList;
+  typeN value;
+  std::deque<edge *> edgeList;
 
-    // Connects this part with the graphics part:
-    GraphicNode* graphics;
+  // Connects this part with the graphics part:
+  GraphicNode *graphics;
 
-    //This is used to find the shortest path:
-    typename G::PathFindData* pathData;
+  // This is used to find the shortest path:
+  typename G::PathFindData *pathData;
 
-    // TODO: copy constructor
-    // TODO: overlodad operator =
+  // TODO: copy constructor
+  // TODO: overlodad operator =
 
-    Node() = default;
+  Node() = default;
 
-    Node(typeN v) {
-        value = v;
+  Node(typeN v) {
+    value = v;
 
-        graphics = nullptr;
-        pathData = nullptr;
-    }
+    graphics = nullptr;
+    pathData = nullptr;
+  }
 
-    ~Node() {
-        // The edge destructor is in charge of removing the edge ptr
-        // contained in the edgeList...
-        while (!edgeList.empty())
-            delete edgeList.front();
-    }
+  ~Node() {
+    // The edge destructor is in charge of removing the edge ptr
+    // contained in the edgeList...
+    while (!edgeList.empty())
+      delete edgeList.front();
+  }
 };
