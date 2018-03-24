@@ -1,5 +1,4 @@
-#ifndef MAINWINDOW_H
-#define MAINWINDOW_H
+#pragma once
 
 #include <QMainWindow>
 
@@ -10,13 +9,12 @@ QT_END_NAMESPACE
 class GraphScene;
 
 class MainWindow : public QMainWindow {
-    Q_OBJECT
+  Q_OBJECT
 
 private:
-    QGraphicsView* view;
-    GraphScene* scene;
+  QGraphicsView *view;
+  GraphScene *scene;
 
 public:
-   MainWindow();
+  MainWindow();
 };
-#endif //MAINWINDOW_H

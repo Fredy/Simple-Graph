@@ -21,13 +21,13 @@ SOURCES += \
     coordGraph/coordGraph.cpp
 
 HEADERS += \
-    graph/edge.h \
-    graph/graph.h \
-    graph/node.h \
-    coordGraph/coordGraph.h \
-    qtGraphics/graphicEdge.h \
-    qtGraphics/graphicNode.h \
-    qtGraphics/graphScene.h \
-    qtGraphics/mainWindow.h
+    graph/edge.hpp \
+    graph/graph.hpp \
+    graph/node.hpp \
+    coordGraph/coordGraph.hpp \
+    qtGraphics/graphicEdge.hpp \
+    qtGraphics/graphicNode.hpp \
+    qtGraphics/graphScene.hpp \
+    qtGraphics/mainWindow.hpp
 
 # FORMS += 

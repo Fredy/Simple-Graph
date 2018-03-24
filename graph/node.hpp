@@ -1,5 +1,4 @@
-#ifndef NODE_H
-#define NODE_H
+#pragma once
 
 #include <deque>
 
@@ -42,5 +41,3 @@ public:
             delete edgeList.front();
     }
 };
-
-#endif //NODE_H
