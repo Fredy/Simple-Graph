@@ -5,13 +5,13 @@
 
 class GraphicNode : public QGraphicsEllipseItem {
 private:
-  CoordGraph::node *data;
+  CoordGraph::NodeType *data;
 
 public:
   enum { Type = UserType + 4 };
   int type() const override { return Type; }
 
-  GraphicNode(CoordGraph::node *data, qreal radius, QGraphicsItem *parent = 0);
+  GraphicNode(CoordGraph::NodeType *data, qreal radius, QGraphicsItem *parent = 0);
   // Custom Destructor is not necessary:
   // The Coord Graph deletes all the basic nodes when is needed.
   // This can't do that because is necessary to remove the nodes
@@ -21,5 +21,5 @@ public:
 
   void removeEdges();
 
-  CoordGraph::node *getData() { return data; }
+  CoordGraph::NodeType *getData() { return data; }
 };

@@ -6,9 +6,9 @@
 
 class CoordGraph : public Graph<QPointF, double> {
 private:
-  std::deque<node *> randomGenNodes(int nodesN, double limitA, double limitB);
+  std::deque<NodeType *> randomGenNodes(int nodesN, double limitA, double limitB);
   void sortNodes();
-  double distance(node *a, node *b);
+  double distance(NodeType *a, NodeType *b);
   void randomGenEdges(unsigned int maxEdges, double distance);
 
 public:

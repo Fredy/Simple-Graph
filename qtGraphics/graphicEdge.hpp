@@ -5,15 +5,15 @@
 
 class GraphicEdge : public QGraphicsLineItem {
 private:
-  CoordGraph::edge *data;
+  CoordGraph::EdgeType *data;
 
 public:
   enum { Type = UserType + 5 };
   int type() const override { return Type; }
 
-  GraphicEdge(CoordGraph::edge *data, QGraphicsItem *parent = 0);
+  GraphicEdge(CoordGraph::EdgeType *data, QGraphicsItem *parent = 0);
 
   void setColor(const QColor &color);
 
-  CoordGraph::edge *getData() { return data; }
+  CoordGraph::EdgeType *getData() { return data; }
 };

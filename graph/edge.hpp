@@ -6,9 +6,9 @@ class GraphicEdge;
 
 template <typename G> class Edge {
 public:
-  using typeE = typename G::typeE;
-  using node = typename G::node;
-  using edge = typename G::edge;
+  using ValueType = typename G::EdgeValueType;
+  using NodeType = typename G::NodeType;
+  using EdgeType = typename G::EdgeType;
 
 private:
   void removeCon(Edge *e) {
@@ -35,8 +35,8 @@ private:
   }
 
 public:
-  typeE value;
-  std::pair<node *, node *> conNodes;
+  ValueType value;
+  std::pair<NodeType *, NodeType *> conNodes;
   bool direction; // 0: [0] <-> [1] ; 1: [0] -> [1]
 
   // Connects this part with the graphics part:
@@ -45,7 +45,7 @@ public:
   // TODO: copy constructor  ???
   // TODO: overlodad operator = ???
 
-  Edge(typeE val, node *nodeA, node *nodeB, bool dir = 0) {
+  Edge(ValueType val, NodeType *nodeA, NodeType *nodeB, bool dir = 0) {
     value = val;
     conNodes = {nodeA, nodeB};
     direction = dir;
@@ -55,7 +55,7 @@ public:
 
   ~Edge() { removeCon(this); }
 
-  node *otherNode(const node *n) {
+  NodeType *otherNode(const NodeType *n) {
     if (n != conNodes.second)
       return conNodes.second;
     else if (n != conNodes.first)

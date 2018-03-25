@@ -1,7 +1,7 @@
 #include "graphicEdge.hpp"
 #include <QPen>
 
-GraphicEdge::GraphicEdge(CoordGraph::edge *data, QGraphicsItem *parent)
+GraphicEdge::GraphicEdge(CoordGraph::EdgeType *data, QGraphicsItem *parent)
     : QGraphicsLineItem(
           QLineF(data->conNodes.first->value, data->conNodes.second->value),
           parent) {

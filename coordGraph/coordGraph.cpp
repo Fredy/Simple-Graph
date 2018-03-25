@@ -4,23 +4,23 @@
 #include <random>
 #include <utility>
 
-std::deque<CoordGraph::node *>
+std::deque<CoordGraph::NodeType *>
 CoordGraph::randomGenNodes(int nodesN, double limitA, double limitB) {
   std::random_device seed;
   std::mt19937 gen(seed());
   std::uniform_real_distribution<double> disA(limitA, limitB),
       disB(limitA, limitB);
 
-  std::deque<node *> nodes(nodesN);
+  std::deque<NodeType *> nodes(nodesN);
   for (auto &i : nodes)
-    i = new node({disA(gen), disB(gen)});
+    i = new NodeType({disA(gen), disB(gen)});
 
   return nodes;
 }
 
 // TODO: Check if is better to make this with the QpointF converted to Qpoint
 void CoordGraph::sortNodes() {
-  std::sort(nodeList.begin(), nodeList.end(), [](node *a, node *b) {
+  std::sort(nodeList.begin(), nodeList.end(), [](NodeType *a, NodeType *b) {
     if (a->value.y() < b->value.y())
       return true;
     else if (a->value.y() > b->value.y())
@@ -31,7 +31,7 @@ void CoordGraph::sortNodes() {
 }
 
 // d = sqrt((x1 - x2)² +(y1 - y2)²)
-double CoordGraph::distance(node *a, node *b) {
+double CoordGraph::distance(NodeType *a, NodeType *b) {
   double x = a->value.x() - b->value.x();
   double y = a->value.y() - b->value.y();
   return sqrt(x * x + y * y);

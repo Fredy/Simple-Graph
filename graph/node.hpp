@@ -7,12 +7,12 @@ class GraphicNode;
 template <typename G> class Node {
 private:
 public:
-  using node = typename G::node;
-  using edge = typename G::edge;
-  using typeN = typename G::typeN;
+  using NodeType = typename G::NodeType;
+  using EdgeType = typename G::EdgeType;
+  using ValueType = typename G::NodeValueType;
 
-  typeN value;
-  std::deque<edge *> edgeList;
+  ValueType value;
+  std::deque<EdgeType *> edgeList;
 
   // Connects this part with the graphics part:
   GraphicNode *graphics;
@@ -25,7 +25,7 @@ public:
 
   Node() = default;
 
-  Node(typeN v) {
+  Node(ValueType v) {
     value = v;
 
     graphics = nullptr;

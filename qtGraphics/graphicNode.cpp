@@ -4,7 +4,7 @@
 #include <QGraphicsScene>
 #include <QStringBuilder>
 
-GraphicNode::GraphicNode(CoordGraph::node *data, qreal radius,
+GraphicNode::GraphicNode(CoordGraph::NodeType *data, qreal radius,
                          QGraphicsItem *parent)
     : QGraphicsEllipseItem(data->value.x() - radius, data->value.y() - radius,
                            radius * 2, radius * 2, parent) {

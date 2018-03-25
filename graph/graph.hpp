@@ -8,36 +8,36 @@
 
 template <typename N, typename E> class Graph {
 public:
-  using self = Graph<N, E>;
-  using typeN = N;
-  using typeE = E;
-  using node = Node<self>;
-  using edge = Edge<self>;
+  using SelfType = Graph<N, E>;
+  using NodeValueType = N;
+  using EdgeValueType = E;
+  using NodeType = Node<SelfType>;
+  using EdgeType = Edge<SelfType>;
 
   struct PathFindData {
     double accDist;
     bool done;
-    edge *prev;
-    PathFindData(double dist, edge *prev) {
+    EdgeType *prev;
+    PathFindData(double dist, EdgeType *prev) {
       this->accDist = dist;
       this->prev = prev;
     }
   };
 
 protected:
-  std::deque<node *> nodeList;
+  std::deque<NodeType *> nodeList;
 
 public:
-  void insertNode(typeN val) { nodeList.push_back(new node(val)); }
+  void insertNode(NodeValueType val) { nodeList.push_back(new NodeType(val)); }
 
-  void insertEdge(typeE val, node *nodeA, node *nodeB, bool dir = 0) {
-    edge *tmp = new edge(val, nodeA, nodeB, dir);
+  void insertEdge(EdgeValueType val, NodeType *nodeA, NodeType *nodeB, bool dir = 0) {
+    EdgeType *tmp = new EdgeType(val, nodeA, nodeB, dir);
     nodeA->edgeList.push_back(tmp);
     if (nodeA != nodeB) // If the edge is a loop we don't have to push it again
       nodeB->edgeList.push_back(tmp);
   }
 
-  void removeNode(node *remv) {
+  void removeNode(NodeType *remv) {
     auto fnd = nodeList.begin();
     while (*fnd != remv)
       fnd++;
@@ -45,16 +45,16 @@ public:
     nodeList.erase(fnd);
   }
 
-  typename std::deque<node *>::iterator
-  removeNode(typename std::deque<node *>::iterator iterator) {
+  typename std::deque<NodeType *>::iterator
+  removeNode(typename std::deque<NodeType *>::iterator iterator) {
     delete *iterator;
     return nodeList.erase(iterator);
   }
 
   // Remove all the edges between two nodes:
-  void removeEdgesBtwn(node *nodeA, node *nodeB) {
-    std::deque<edge *> toremove;
-    for (edge *i : nodeA->edgeList) {
+  void removeEdgesBtwn(NodeType *nodeA, NodeType *nodeB) {
+    std::deque<EdgeType *> toremove;
+    for (EdgeType *i : nodeA->edgeList) {
       auto &first = i->conNodes.first;
       auto &second = i->conNodes.second;
 
@@ -62,13 +62,13 @@ public:
           (first == nodeB and second == nodeA))
         toremove.push_back(i);
     }
-    for (edge *i : toremove)
+    for (EdgeType *i : toremove)
       delete i;
   }
 
-  void removeEdge(edge *remv) { delete remv; }
+  void removeEdge(EdgeType *remv) { delete remv; }
 
-  const std::deque<node *> &getNodeList() { return nodeList; }
+  const std::deque<NodeType *> &getNodeList() { return nodeList; }
 
   void clear() {
     while (!nodeList.empty()) {
@@ -77,17 +77,17 @@ public:
     }
   }
 
-  std::pair<double, std::deque<edge *>> minPathDijkstra(node *start,
-                                                        node *end) {
+  std::pair<double, std::deque<EdgeType *>> minPathDijkstra(NodeType *start,
+                                                        NodeType *end) {
 
-    std::deque<node *> queue;
+    std::deque<NodeType *> queue;
     start->pathData = new PathFindData(0.0, nullptr);
     queue.push_back(start);
 
     while (!queue.empty()) {
-      node *crtNode = queue.front();
+      NodeType *crtNode = queue.front();
       for (const auto &iedge : crtNode->edgeList) {
-        node *otherNode = iedge->otherNode(crtNode);
+        NodeType *otherNode = iedge->otherNode(crtNode);
         double dist = crtNode->pathData->accDist + iedge->value;
         if (otherNode->pathData == nullptr) {
           otherNode->pathData = new PathFindData(dist, iedge);
@@ -99,7 +99,7 @@ public:
 
         } else {
           if (dist < otherNode->pathData->accDist) {
-            node *tmp = new node();
+            NodeType *tmp = new NodeType();
             tmp->pathData = new PathFindData(dist, nullptr);
 
             auto pos = std::upper_bound(
@@ -121,11 +121,11 @@ public:
       }
       queue.pop_front();
     }
-    std::deque<edge *> edgePath;
+    std::deque<EdgeType *> edgePath;
     double pathLenght = 0.0;
     if (end->pathData) {
       pathLenght = end->pathData->accDist;
-      node *actNode = end;
+      NodeType *actNode = end;
       while (actNode != start) {
         edgePath.push_back(actNode->pathData->prev);
         actNode = actNode->pathData->prev->otherNode(actNode);
