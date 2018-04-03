@@ -94,7 +94,7 @@ void GraphScene::mousePressEvent(QGraphicsSceneMouseEvent *mouseEvent) {
         }
       }
       if (selecNodes[0] and selecNodes[1]) {
-        auto res = graph->minPathDijkstra(selecNodes[0]->getData(),
+        auto res = graph->TreeA(selecNodes[0]->getData(),
                                           selecNodes[1]->getData());
         qDebug() << res.first << endl;
         for (const auto &i : res.second) {

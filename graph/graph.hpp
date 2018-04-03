@@ -77,6 +77,7 @@ public:
     }
   }
 
+
   std::pair<double, std::deque<EdgeType *>> minPathDijkstra(NodeType *start,
                                                         NodeType *end) {
 
@@ -141,4 +142,6 @@ public:
   }
 
   ~Graph() { this->clear(); }
+
+
 };

@@ -2,12 +2,16 @@
 #include <algorithm>
 #include <cmath>
 #include <random>
+#include <ctime>
 #include <utility>
+#include <limits>
+
+using EdgeType = Edge<Graph<QPointF, double>>;
 
 std::deque<CoordGraph::NodeType *>
 CoordGraph::randomGenNodes(int nodesN, double limitA, double limitB) {
   std::random_device seed;
-  std::mt19937 gen(seed());
+  std::mt19937 gen(time(0));
   std::uniform_real_distribution<double> disA(limitA, limitB),
       disB(limitA, limitB);
 
@@ -67,4 +71,58 @@ void CoordGraph::removeNodeRange(QPointF first, QPointF last) {
     else
       i++;
   }
+}
+
+std::pair<double, std::deque<EdgeType *>> CoordGraph::TreeA(NodeType *start,NodeType *end){
+    std::deque<NodeType *> queue;
+    start->pathData = new PathFindData(0.0, nullptr);
+    EdgeType *tem;
+    (start->pathData)->done = true;
+    queue.push_back(start);
+    bool roads = true;
+    double edgeD = 0.0;
+    while(roads && queue.back() != end){
+        NodeType *crtNode = queue.back(),*next_n;
+
+        double max_d = std::numeric_limits<double>::infinity();
+        roads= false;
+        for (const auto &iedge : crtNode->edgeList) {
+            NodeType *otherNode = iedge->otherNode(crtNode);
+            if((otherNode->pathData == nullptr || (otherNode->pathData)->done == false) && (distance(otherNode,end)+ iedge->value)<max_d){
+                roads=true;
+                edgeD =  iedge->value;
+                next_n = otherNode;
+                tem = iedge;
+                max_d = distance(otherNode,end)+ iedge->value;
+            }
+        }
+        if(roads){
+            double disP  =((queue.back())->pathData)->accDist;
+             next_n->pathData = new PathFindData(disP+edgeD, tem);
+             (next_n->pathData)->done = true;
+             queue.push_back(next_n);
+        }else{
+            queue.pop_back();
+        }
+
+    }
+
+    std::deque<EdgeType *> edgePath;
+    double pathLenght = 0.0;
+    if (end->pathData) {
+      pathLenght = end->pathData->accDist;
+      NodeType *actNode = end;
+      while (actNode != start) {
+        edgePath.push_back(actNode->pathData->prev);
+        actNode = actNode->pathData->prev->otherNode(actNode);
+      }
+      for (const auto &i : nodeList) {
+        if (i->pathData) {
+          delete i->pathData;
+          i->pathData = nullptr;
+        }
+      }
+    }
+    return {pathLenght, edgePath};
+
 }
